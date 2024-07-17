@@ -5,21 +5,11 @@ function onCreated() {
 browser.menus.create(
     {
         id: "show-resolution",
-        title: "Show video resolution",
+        title: "Show video resolution window",
         contexts: ["all"],
     },
     onCreated,
 );
-
-/*browser.runtime.onMessage.addListener((obj) => {
-    const found = obj?.message === 'video found'
-    browser.menus.update(
-        'show-resolution', {
-            enabled: found
-        }
-    )
-    console.debug(found ? 'video found' : 'video not found')
-});*/
 
 browser.menus.onClicked.addListener((info, tab) => {
   switch (info.menuItemId) {
@@ -36,5 +26,5 @@ browser.menus.onClicked.addListener((info, tab) => {
       break;
       // …
   }
-});
+})
 
