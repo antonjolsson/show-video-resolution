@@ -1,3 +1,5 @@
+// TODO: Change menu text depending on state (keep track of current tab), more stats?
+
 browser.runtime.onMessage.addListener(showOrCloseInfoWindow);
 
 let updateInterval
@@ -15,23 +17,23 @@ function getStats(video) {
     numVideoFrames = quality.totalVideoFrames
     return `<b>Resolution:</b> ${videoWidth} x ${videoHeight}<br>
             <b>Framerate: </b>${deltaFrames} FPS<br>
-            <b>Dropped frames: </b>${quality.droppedVideoFrames}
-`
+            <b>Dropped frames: </b>${quality.droppedVideoFrames}`
 }
 
 function showOrCloseInfoWindow()  {
-    let result = document.getElementById('video-res-div')
+    let result = document.getElementById('video-stats-div')
     if (result) {
         result.remove()
         numVideoFrames = 0
         clearInterval(updateInterval)
+        // browser.runtime.sendMessage({message: 'window hidden'})
         return
     }
-
+    // browser.runtime.sendMessage({message: 'window visible'})
     const video= document.querySelector('video')
 
     const div = document.createElement('div')
-    div.id = 'video-res-div'
+    div.id = 'video-stats-div'
     div.style.position = 'absolute'
     div.style.display = 'flex'
     div.style.flexDirection = 'column'
@@ -39,7 +41,7 @@ function showOrCloseInfoWindow()  {
     div.style.alignItems = 'flex-start'
     div.style.top = '1rem'
     div.style.left = '1rem'
-    div.style.zIndex = video.style.zIndex + 1
+    div.style.zIndex = String(Number.MAX_SAFE_INTEGER)
     div.style.background = 'rgba(0 0 0 / 0.5)'
     div.style.color = 'white'
     div.style.padding = '1.2rem 1.4rem'
@@ -55,9 +57,13 @@ function showOrCloseInfoWindow()  {
     closeCross.style.cursor = 'pointer'
 
     const p = document.createElement('p')
-    p.innerHTML = getStats(video)
+    const stats = getStats(video)
+    p.innerHTML = stats
 
-    const videoParent = video.parentElement
+    const videoParent = stats === 'Could not find video element'
+        ? document.body
+        : video.parentElement
+
     videoParent.appendChild(div)
     div.appendChild(closeCross)
     div.appendChild(p)

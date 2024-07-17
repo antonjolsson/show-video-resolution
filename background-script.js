@@ -4,7 +4,7 @@ function onCreated() {
 
 browser.menus.create(
     {
-        id: "show-resolution",
+        id: "show-statistics",
         title: "Show video statistics window",
         contexts: ["all"],
     },
@@ -13,7 +13,7 @@ browser.menus.create(
 
 browser.menus.onClicked.addListener((info, tab) => {
   switch (info.menuItemId) {
-    case "show-resolution":
+    case "show-statistics":
         browser.tabs
             .query({
                 currentWindow: true,
@@ -24,7 +24,12 @@ browser.menus.onClicked.addListener((info, tab) => {
                 browser.tabs.sendMessage(tabId, info.targetElementId)
             })
       break;
-      // …
   }
 })
+
+/*browser.runtime.onMessage.addListener((obj) => {
+    browser.menus.update('show-statistics', {
+        title: obj?.message === 'window hidden' ? 'Show video statistics window' : 'Hide video statistics window'
+    })
+});*/
 
