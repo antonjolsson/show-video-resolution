@@ -1,4 +1,4 @@
-browser.runtime.onMessage.addListener(notify);
+browser.runtime.onMessage.addListener(showOrCloseInfoWindow);
 
 let updateInterval
 let numVideoFrames = 0
@@ -13,12 +13,13 @@ function getStats(video) {
     const quality = video.getVideoPlaybackQuality()
     const deltaFrames = numVideoFrames > 0 ? quality.totalVideoFrames - numVideoFrames : 'N/A'
     numVideoFrames = quality.totalVideoFrames
-    return `Resolution: <b>${videoWidth} x ${videoHeight}</b><br>
-            Framerate: <b>${deltaFrames} FPS</b>
+    return `<b>Resolution:</b> ${videoWidth} x ${videoHeight}<br>
+            <b>Framerate: </b>${deltaFrames} FPS<br>
+            <b>Dropped frames: </b>${quality.droppedVideoFrames}
 `
 }
 
-function notify()  {
+function showOrCloseInfoWindow()  {
     let result = document.getElementById('video-res-div')
     if (result) {
         result.remove()
@@ -41,7 +42,7 @@ function notify()  {
     div.style.zIndex = video.style.zIndex + 1
     div.style.background = 'rgba(0 0 0 / 0.5)'
     div.style.color = 'white'
-    div.style.padding = '1.2rem'
+    div.style.padding = '1.2rem 1.4rem'
     div.style.borderRadius = '0.5rem'
     div.style.fontSize = 'calc(max(0.8rem, 12.8px))'
 
@@ -50,7 +51,7 @@ function notify()  {
     closeCross.style.position = 'absolute'
     closeCross.style.top = '0.1rem'
     closeCross.style.right = '0.3rem'
-    closeCross.onclick = notify
+    closeCross.onclick = showOrCloseInfoWindow
     closeCross.style.cursor = 'pointer'
 
     const p = document.createElement('p')
