@@ -5,7 +5,7 @@ let numVideoFrames = 0
 
 function getStats(video) {
     if (!video) {
-        return 'Could not get video element'
+        return 'Could not find video element'
     }
 
     const videoWidth = video?.videoWidth

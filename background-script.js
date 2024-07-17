@@ -5,7 +5,7 @@ function onCreated() {
 browser.menus.create(
     {
         id: "show-resolution",
-        title: "Show video resolution window",
+        title: "Show video statistics window",
         contexts: ["all"],
     },
     onCreated,
