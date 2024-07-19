@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "Video Statistics",
+  "name": "Video Stream Statistics",
   "version": "1.0",
 
   "description": "Shows some basic statistics on the stream displayed in a <video> element.",

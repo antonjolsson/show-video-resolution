@@ -5,7 +5,7 @@ function onCreated() {
 browser.menus.create(
     {
         id: "show-statistics",
-        title: "Show video statistics window",
+        title: "Show video statistics",
         contexts: ["all"],
     },
     onCreated,
