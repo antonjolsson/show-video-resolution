@@ -26,10 +26,3 @@ browser.menus.onClicked.addListener((info, tab) => {
       break;
   }
 })
-
-/*browser.runtime.onMessage.addListener((obj) => {
-    browser.menus.update('show-statistics', {
-        title: obj?.message === 'window hidden' ? 'Show video statistics window' : 'Hide video statistics window'
-    })
-});*/
-

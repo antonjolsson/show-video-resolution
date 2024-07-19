@@ -4,10 +4,11 @@ browser.runtime.onMessage.addListener(showOrCloseInfoWindow);
 
 let updateInterval
 let numVideoFrames = 0
+const NO_VIDEO_MESSAGE = 'Could not find a video element'
 
 function getStats(video) {
     if (!video) {
-        return 'Could not find video element'
+        return NO_VIDEO_MESSAGE
     }
 
     const videoWidth = video?.videoWidth
@@ -26,11 +27,15 @@ function showOrCloseInfoWindow()  {
         result.remove()
         numVideoFrames = 0
         clearInterval(updateInterval)
-        // browser.runtime.sendMessage({message: 'window hidden'})
         return
     }
     // browser.runtime.sendMessage({message: 'window visible'})
     const video= document.querySelector('video')
+    const stats = getStats(video)
+    if (stats === NO_VIDEO_MESSAGE) {
+        alert(NO_VIDEO_MESSAGE)
+        return
+    }
 
     const div = document.createElement('div')
     div.id = 'video-stats-div'
@@ -57,13 +62,9 @@ function showOrCloseInfoWindow()  {
     closeCross.style.cursor = 'pointer'
 
     const p = document.createElement('p')
-    const stats = getStats(video)
     p.innerHTML = stats
 
-    const videoParent = stats === 'Could not find video element'
-        ? document.body
-        : video.parentElement
-
+    const videoParent = video.parentElement
     videoParent.appendChild(div)
     div.appendChild(closeCross)
     div.appendChild(p)
