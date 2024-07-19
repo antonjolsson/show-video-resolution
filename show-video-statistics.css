@@ -1,0 +1,22 @@
+#video-stats-div {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    top: 1rem;
+    left: 1rem;
+    z-index: 9007199254740991;
+    background: rgba(0 0 0 / 0.5);
+    color: white;
+    padding: 1.2rem 1.4rem;
+    border-radius: 0.5rem;
+    font-size: calc(max(0.8rem, 12.8px));
+}
+
+#close-cross {
+    position: absolute;
+    top: 0.1rem;
+    right: 0.3rem;
+    cursor: pointer;
+}

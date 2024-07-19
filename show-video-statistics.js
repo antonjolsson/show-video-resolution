@@ -27,7 +27,6 @@ function showOrCloseInfoWindow()  {
         clearInterval(updateInterval)
         return
     }
-    // browser.runtime.sendMessage({message: 'window visible'})
     const video= document.querySelector('video')
     const stats = getStats(video)
     if (stats === NO_VIDEO_MESSAGE) {
@@ -37,27 +36,10 @@ function showOrCloseInfoWindow()  {
 
     const div = document.createElement('div')
     div.id = 'video-stats-div'
-    div.style.position = 'absolute'
-    div.style.display = 'flex'
-    div.style.flexDirection = 'column'
-    div.style.justifyContent = 'center'
-    div.style.alignItems = 'flex-start'
-    div.style.top = '1rem'
-    div.style.left = '1rem'
-    div.style.zIndex = String(Number.MAX_SAFE_INTEGER)
-    div.style.background = 'rgba(0 0 0 / 0.5)'
-    div.style.color = 'white'
-    div.style.padding = '1.2rem 1.4rem'
-    div.style.borderRadius = '0.5rem'
-    div.style.fontSize = 'calc(max(0.8rem, 12.8px))'
 
     const closeCross = document.createElement('div')
-    closeCross.innerText = 'x'
-    closeCross.style.position = 'absolute'
-    closeCross.style.top = '0.1rem'
-    closeCross.style.right = '0.3rem'
+    closeCross.id = 'close-cross'
     closeCross.onclick = showOrCloseInfoWindow
-    closeCross.style.cursor = 'pointer'
 
     const p = document.createElement('p')
     p.innerHTML = stats

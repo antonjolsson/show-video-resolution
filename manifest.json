@@ -8,7 +8,8 @@
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["show-video-statistics.js"]
+      "js": ["show-video-statistics.js"],
+      "css": ["show-video-statistics.css"]
     }
   ],
   "background": {
