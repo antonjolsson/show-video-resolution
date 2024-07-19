@@ -1,5 +1,3 @@
-// TODO: Change menu text depending on state (keep track of current tab), more stats?
-
 browser.runtime.onMessage.addListener(showOrCloseInfoWindow);
 
 let updateInterval
@@ -18,7 +16,7 @@ function getStats(video) {
     numVideoFrames = quality.totalVideoFrames
     return `<b>Resolution:</b> ${videoWidth} x ${videoHeight}<br>
             <b>Framerate: </b>${deltaFrames} FPS<br>
-            <b>Dropped frames: </b>${quality.droppedVideoFrames}`
+            <b>Dropped frames: </b>${quality.droppedVideoFrames} out of ${quality.totalVideoFrames}`
 }
 
 function showOrCloseInfoWindow()  {
