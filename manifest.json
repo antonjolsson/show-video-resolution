@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
-  "name": "Show Video Resolution",
+  "name": "Video Streaming Statistics",
   "version": "1.0",
 
-  "description": "Shows the source video resolution of a <video> element.",
+  "description": "Shows some basic statistics on the stream displayed in a <video> element.",
 
   "content_scripts": [
     {
